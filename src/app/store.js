@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-
+import topArtistsReducer from '../features/homepage/topArtistsSlice'
 
 export default configureStore({
-  reducer: {}
+  reducer: {
+    top_artists: topArtistsReducer
+  }
 })

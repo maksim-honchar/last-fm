@@ -6,8 +6,8 @@ import {
   Redirect
 } from 'react-router-dom'
 import './App.css'
-import { TopBar } from './app/TopBar'
-import { TopTabs } from './app/TopTabs'
+import { TopBar } from './features/TopBar'
+import { TopTabs } from './features/TopTabs'
 import { HomePage } from './features/homepage/HomePage'
 import { SearchPage } from './features/searchpage/SearchPage'
 
