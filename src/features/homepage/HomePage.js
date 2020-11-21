@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
-import { topArtistsURL } from '../../app/utils'
-import { useDispatch, useSelect } from 'react-redux'
-import { topArtists, selectTopArtists } from './topArtistsSlice'
+import { topTracksURL } from '../../app/utils'
+import { useDispatch, useSelector } from 'react-redux'
+import { topTracks } from './topTracksSlice'
 
 
 export const HomePage = () => {
     const dispatch = useDispatch()
 
+
     useEffect(() => {
         const fetchTopArtists = () => async dispatch => {
-            const request = await fetch(topArtistsURL)
+            const request = await fetch(topTracksURL)
             const response = await request.json()
-            dispatch(topArtists(response))
+            dispatch(topTracks(response))
         }
         dispatch(fetchTopArtists())
     }, [dispatch])
