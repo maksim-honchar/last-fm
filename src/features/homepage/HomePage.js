@@ -6,6 +6,7 @@ import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
 import Typography from '@material-ui/core/Typography'
+import { CardArtist } from './CardArtist'
 
 const useStyles = makeStyles((theme) => ({
     pagination: {
@@ -21,24 +22,12 @@ export const HomePage = () => {
 
     const [page, setPage] = useState(1)
 
-    const tracks = useSelector(state => state.top_tracks.tracks)
     const amountPages = useSelector(state => state.top_tracks.pages.totalPages)
     const amountPagesNum = Number(amountPages)
-    // console.log(tracks)
-    // console.log(amountPages)
-
-    let listTracks
-
-    if (tracks) {
-        listTracks = tracks.map((track, index) => <p key={index}>{track.name} - {track.artist.name}</p>)
-    }
-
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage)
-        console.log(newPage)
     }
-
 
     useEffect(() => {
         const fetchData = () => async dispatch => {
@@ -54,7 +43,7 @@ export const HomePage = () => {
             <Typography variant="h4">
                 top tracks
             </Typography>
-            {listTracks}
+            <CardArtist />
             <div className={classes.pagination}>
                 <Pagination
                     count={amountPagesNum}
