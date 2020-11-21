@@ -1,17 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export const topTracksSlice = createSlice({
   name: 'top_tracks',
   initialState: {
-    data: [],
+    pages: {},
+    tracks: [],
   },
   reducers: {
     topTracks: (state, action) => {
-      state.data = action.payload
+      state.tracks = action.payload
+    },
+    pagesInfo: (state, action) => {
+      state.pages = action.payload
     }
   }
 })
 
-export const { topTracks } = topTracksSlice.actions;
+export const { topTracks, pagesInfo } = topTracksSlice.actions
+
+export const selectTopTracks = state => state.top_tracks.info.tracks
 
 export default topTracksSlice.reducer
