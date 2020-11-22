@@ -1,5 +1,7 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectTopTracks } from './topTracksSlice'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
@@ -8,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { useSelector } from 'react-redux'
+
 
 const useStyles = makeStyles({
     card: {
@@ -19,15 +21,15 @@ const useStyles = makeStyles({
 export const CardArtist = () => {
     const classes = useStyles()
 
-    const tracks = useSelector(state => state.top_tracks.tracks)
+    const tracks = useSelector(selectTopTracks)
 
     let listTracks
 
     if (tracks) {
         listTracks = tracks.map((track, index) =>
-            <Card className={classes.card}>
-                <a href={track.artist.url} target="_blank" rel="noreferrer">
-                    <CardActionArea>
+            <Card className={classes.card} key={index}>
+                <CardActionArea>
+                    <Link to={`/artists/${track.artist.name}`}>
                         <CardMedia
                             component="img"
                             alt={track.name}
@@ -43,11 +45,13 @@ export const CardArtist = () => {
                                 {track.artist.name}
                             </Typography>
                         </CardContent>
-                    </CardActionArea>
-                </a>
+                    </Link>
+                </CardActionArea>
                 <CardActions>
                     <Button size="small" color="primary">
-                        {track.artist.name} on Last.fm
+                        <a href={track.artist.url} target="_blank" rel="noreferrer">
+                            {track.artist.name} on Last.fm
+                        </a>
                     </Button>
                 </CardActions>
             </Card>

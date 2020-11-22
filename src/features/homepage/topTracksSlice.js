@@ -18,6 +18,8 @@ export const topTracksSlice = createSlice({
 
 export const { topTracks, pagesInfo } = topTracksSlice.actions
 
-export const selectTopTracks = state => state.top_tracks.info.tracks
+export const selectTotalPages = state => state.top_tracks.pages.totalPages
+
+export const selectTopTracks = state => state.top_tracks.tracks
 
 export default topTracksSlice.reducer

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { topTracksURL } from '../../app/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { topTracks, pagesInfo } from './topTracksSlice'
+import { topTracks, pagesInfo, selectTotalPages } from './topTracksSlice'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
@@ -22,7 +22,7 @@ export const HomePage = () => {
 
     const [page, setPage] = useState(1)
 
-    const amountPages = useSelector(state => state.top_tracks.pages.totalPages)
+    const amountPages = useSelector(selectTotalPages)
     const amountPagesNum = Number(amountPages)
 
     const handleChangePage = (event, newPage) => {
@@ -43,6 +43,14 @@ export const HomePage = () => {
             <Typography variant="h4">
                 top tracks
             </Typography>
+            <div className={classes.pagination}>
+                <Pagination
+                    count={amountPagesNum}
+                    color="secondary"
+                    page={page}
+                    onChange={handleChangePage}
+                />
+            </div>
             <CardArtist />
             <div className={classes.pagination}>
                 <Pagination
