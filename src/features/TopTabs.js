@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
@@ -15,16 +15,14 @@ const useStyles = makeStyles((theme) => ({
 
 export const TopTabs = () => {
     const classes = useStyles()
-    const [value, setValue] = React.useState(0)
+    const [value, setValue] = useState(0)
 
     const history = useHistory()
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
-    }
 
-    useEffect(() => {
-        switch (value) {
+        switch (newValue) {
             case 0:
                 history.push("/")
                 break;
@@ -34,8 +32,7 @@ export const TopTabs = () => {
             default:
                 history.push("/")
         }
-    }, [history, value])
-
+    }
 
     return (
         <div className={classes.root}>
