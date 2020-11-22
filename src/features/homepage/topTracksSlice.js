@@ -7,16 +7,16 @@ export const topTracksSlice = createSlice({
     tracks: [],
   },
   reducers: {
-    topTracks: (state, action) => {
+    topTracksA: (state, action) => {
       state.tracks = action.payload
     },
-    pagesInfo: (state, action) => {
+    pagesInfoA: (state, action) => {
       state.pages = action.payload
     }
   }
 })
 
-export const { topTracks, pagesInfo } = topTracksSlice.actions
+export const { topTracksA, pagesInfoA } = topTracksSlice.actions
 
 export const selectTotalPages = state => state.top_tracks.pages.totalPages
 

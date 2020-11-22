@@ -10,7 +10,7 @@ import { TopBar } from './features/TopBar'
 import { TopTabs } from './features/TopTabs'
 import { HomePage } from './features/homepage/HomePage'
 import { ArtistPage } from './features/artistpage/ArtistPage'
-import { SearchPage } from './features/searchpage/SearchPage'
+import { SearchTrackPage } from './features/search_track_page/SearchTrackPage'
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/artists/:artist" component={ArtistPage} />
-          <Route exact path="/search" component={SearchPage} />
+          <Route exact path="/search" component={SearchTrackPage} />
           <Redirect to="/" />
         </Switch>
       </Router>

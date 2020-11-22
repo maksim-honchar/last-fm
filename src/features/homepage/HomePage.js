@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { topTracksURL } from '../../app/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { topTracks, pagesInfo, selectTotalPages } from './topTracksSlice'
+import { topTracksA, pagesInfoA, selectTotalPages } from './topTracksSlice'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
@@ -32,15 +32,15 @@ export const HomePage = () => {
     useEffect(() => {
         const fetchData = () => async dispatch => {
             const request = await axios.get(`${topTracksURL}&page=${page}`)
-            dispatch(topTracks(request.data.tracks.track))
-            dispatch(pagesInfo(request.data.tracks['@attr']))
+            dispatch(topTracksA(request.data.tracks.track))
+            dispatch(pagesInfoA(request.data.tracks['@attr']))
         }
         dispatch(fetchData())
     }, [dispatch, page])
 
     return (
         <section>
-            <Typography variant="h4">
+            <Typography component="h2" variant="h4">
                 top tracks
             </Typography>
             <div className={classes.pagination}>
