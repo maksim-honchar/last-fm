@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 600,
         width: '100%',
         minHeight: '100vh',
-        margin: '25px auto'
+        margin: '25px auto',
+        border: '1px solid #e0e0e0'
     },
     item: {
         padding: theme.spacing(1),

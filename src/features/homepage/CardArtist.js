@@ -18,9 +18,13 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+
     },
     typography: {
         paddingTop: theme.spacing(1),
+    },
+    card: {
+        border: '1px solid #e0e0e0'
     }
 }))
 
@@ -34,7 +38,7 @@ export const CardArtist = () => {
     if (tracks) {
         listTracks = tracks.map((track, index) =>
             <Grid item lg={3} key={index} className={classes.grid_item}>
-                <Card>
+                <Card className={classes.card}>
                     <CardActionArea>
                         <Link to={`/artists/${track.artist.name}`} className="link">
                             <Typography color="textPrimary" variant="h6" gutterBottom className={classes.typography}>
@@ -55,7 +59,7 @@ export const CardArtist = () => {
                         </Link>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="secondary" variant="outlined">
+                        <Button size="small" color="secondary">
                             <a href={track.artist.url} target="_blank" rel="noreferrer" className="link button-link">
                                 [ {track.artist.name} ] on Last.fm
                             </a>
