@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    pagination: {
+        '& > *': {
+            marginTop: theme.spacing(2),
+        },
+    }
 }))
 
 export const SearchTrackPage = () => {
@@ -43,9 +48,8 @@ export const SearchTrackPage = () => {
     const [nameTrack, setNameTrack] = useState(' ')
     const [page, setPage] = useState(1)
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage)
-    }
+    const handleChangePage = (event, newPage) => setPage(newPage)
+
 
     const handleChange = (e) => {
         if (e.target.value !== '') {
@@ -80,7 +84,7 @@ export const SearchTrackPage = () => {
             dispatch(amountTracksA(request.data.results['opensearch:totalResults']))
         }
         dispatch(fetchData())
-    }, [page])
+    }, [page, dispatch])
 
 
     return (
@@ -114,7 +118,7 @@ export const SearchTrackPage = () => {
                 </div>
                 <div>
                     {listTracks}
-                    <div className={classes.pagination}>
+                    <div className={classes.pagination} >
                         <Pagination
                             count={amountPages}
                             color="secondary"

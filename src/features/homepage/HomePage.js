@@ -25,9 +25,7 @@ export const HomePage = () => {
     const amountPages = useSelector(selectTotalPages)
     const amountPagesNum = Number(amountPages)
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage)
-    }
+    const handleChangePage = (event, newPage) => setPage(newPage)
 
     useEffect(() => {
         const fetchData = () => async dispatch => {

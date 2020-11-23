@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { findTrackA, amountTracksA } from './search_track_page/searchTrackSlice'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const TopTabs = () => {
     const classes = useStyles()
+    const dispatch = useDispatch()
     const [value, setValue] = useState(0)
 
     const history = useHistory()
@@ -26,6 +29,8 @@ export const TopTabs = () => {
         switch (newValue) {
             case 0:
                 history.push("/")
+                dispatch(findTrackA([]))
+                dispatch(amountTracksA(0))
                 break;
             case 1:
                 history.push("/search")
