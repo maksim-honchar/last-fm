@@ -35,9 +35,10 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
     pagination: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
+        paddingTop: theme.spacing(5),
+        paddingBottom: theme.spacing(5)
+    }, search_output: {
+        padding: theme.spacing(0, 2),
     }
 }))
 
@@ -86,11 +87,34 @@ export const SearchTrackPage = () => {
         dispatch(fetchData())
     }, [page, dispatch])
 
+    const searchTrackPageContent = (
+
+        <Grid container direction="column" justify="center" alignItems="center">
+            <div className={classes.search_output}>
+                <Grid item xs>
+                    {listTracks}
+                </Grid>
+            </div>
+            <Grid item xs>
+                <div className={classes.pagination} >
+                    <Pagination
+                        count={amountPages}
+                        color="secondary"
+                        page={page}
+                        onChange={handleChangePage}
+                    />
+                </div>
+            </Grid>
+        </Grid>
+
+    )
+
+    const isLoad = Boolean(amountPages) && Boolean(tracks)
 
     return (
-        <Grid container component="main" className={classes.root}>
+        <Grid container component="main" className={classes.root} justify="center">
             <CssBaseline />
-            <Grid item xs={12} sm={8} md={5} style={{ margin: ' 10px auto' }}>
+            <Grid item xs={12} sm={8} md={5}>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <SearchIcon />
@@ -117,15 +141,7 @@ export const SearchTrackPage = () => {
                     </form>
                 </div>
                 <div>
-                    {listTracks}
-                    <div className={classes.pagination} >
-                        <Pagination
-                            count={amountPages}
-                            color="secondary"
-                            page={page}
-                            onChange={handleChangePage}
-                        />
-                    </div>
+                    {isLoad ? searchTrackPageContent : null}
                 </div>
             </Grid>
         </Grid>

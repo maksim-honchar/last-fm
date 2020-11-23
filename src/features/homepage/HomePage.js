@@ -66,10 +66,12 @@ export const HomePage = () => {
         </React.Fragment>
     )
 
+    const isLoad = Boolean(amountPages) && Boolean(tracks)
+
     return (
         <section>
             <Grid container justify='center'>
-                {amountPages && tracks ? homePageContent : <div className={classes.spinner}><CircularProgress /></div>}
+                {isLoad ? homePageContent : <div className={classes.spinner}><CircularProgress /></div>}
             </Grid>
         </section>
     )
