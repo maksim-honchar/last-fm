@@ -21,15 +21,35 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
-
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     card: {
-        // maxWidth: 345,
+        maxWidth: 600,
         width: '100%',
-        minHeight: '100vh'
+        minHeight: '100vh',
+        margin: '25px auto'
     },
-})
+    item: {
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+    button: {
+        margin: 'auto'
+    },
+    card_media: {
+        maxWidth: 300,
+        margin: 'auto'
+    },
+    tags: {
+        margin: theme.spacing(1),
+    },
+    spinner: {
+        marginTop: theme.spacing(20)
+    }
+}))
 
 
 export const ArtistPage = ({ match }) => {
@@ -45,8 +65,10 @@ export const ArtistPage = ({ match }) => {
     const artistBio = useSelector(selectArtistBio)
 
     const tags = artistTags.map(tag =>
-        <Typography color="secondary" key={tag.name}>
-            {tag.name}
+        <Typography key={tag.name} variant="subtitle2">
+            <Grid item className={classes.tags}>
+                {tag.name}
+            </Grid>
         </Typography>
     )
 
@@ -69,37 +91,62 @@ export const ArtistPage = ({ match }) => {
         dispatch(fetchData())
     }, [artist, dispatch])
 
-    return (
-        < section >
-            <Card className={classes.card}>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {artistName}
-                        </Typography>
-                        <CardMedia
-                            component="img"
-                            alt={artistName}
-                            style={{ width: 300, margin: 'auto' }}
-                            height="300"
-                            src={artistPic}
-                            title={artistName}
-                        />
-                        <div>
-                            {tags}
-                        </div>
-                        <Typography>
-                            {artistBio}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-                    <Button color="primary" onClick={handleClick}>
-                        Back
+    const artisPageContent = (
+        <Card className={classes.card}>
+            <Grid container direction="column">
+                <Grid item xs className={classes.item}>
+                    <CardActionArea>
+                        <CardContent>
+                            <Grid item xs className={classes.item}>
+                                <Typography gutterBottom variant="h4" component="h2">
+                                    {artistName}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs className={classes.item}>
+                                <CardMedia
+                                    component="img"
+                                    alt={artistName}
+                                    height="300"
+                                    src={artistPic}
+                                    title={artistName}
+                                    className={classes.card_media}
+                                />
+                            </Grid>
+                            <Grid item xs className={classes.item}>
+                                <Grid container direction="row" justify="center">
+                                    {tags}
+                                </Grid>
+                            </Grid>
+                            <Grid item xs className={classes.item}>
+                                <Typography color="textPrimary">
+                                    {artistBio}
+                                </Typography>
+                            </Grid>
+                        </CardContent>
+                    </CardActionArea>
+                </Grid>
+                <Grid item xs className={classes.item}>
+                    <CardActions>
+                        <Button
+                            className={classes.button}
+                            variant="outlined"
+                            color="secondary"
+                            size="large"
+                            onClick={handleClick}
+                        >
+                            Back
                     </Button>
-                </CardActions>
-            </Card>
-        </section >
+                    </CardActions>
+                </Grid>
+            </Grid>
+        </Card>
     )
 
+    const isLoad = Boolean(artistName) && Boolean(artistPic) && Boolean(artistTags) && Boolean(artistBio)
+
+    return (
+        < section >
+            {isLoad ? artisPageContent : <div className={classes.spinner}><CircularProgress /></div>}
+        </section >
+    )
 }

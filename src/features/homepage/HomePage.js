@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { topTracksURL } from '../../app/utils'
 import { useDispatch, useSelector } from 'react-redux'
-import { topTracksA, pagesInfoA, selectTotalPages } from './topTracksSlice'
+import { topTracksA, pagesInfoA, selectTotalPages, selectTopTracks } from './topTracksSlice'
 import axios from 'axios'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
 import Grid from '@material-ui/core/Grid'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 import { CardArtist } from './CardArtist'
 
@@ -14,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     pagination: {
         paddingTop: theme.spacing(5),
         paddingBottom: theme.spacing(5)
+    },
+    spinner: {
+        marginTop: theme.spacing(20)
     }
 }))
 
@@ -23,6 +27,7 @@ export const HomePage = () => {
 
     const [page, setPage] = useState(1)
 
+    const tracks = useSelector(selectTopTracks)
     const amountPages = useSelector(selectTotalPages)
     const amountPagesNum = Number(amountPages)
 
@@ -37,28 +42,34 @@ export const HomePage = () => {
         dispatch(fetchData())
     }, [dispatch, page])
 
+    const homePageContent = (
+        <React.Fragment>
+            <div className={classes.pagination}>
+                <Pagination
+                    count={amountPagesNum}
+                    color="secondary"
+                    page={page}
+                    onChange={handleChangePage}
+                />
+            </div>
+            <div>
+                <CardArtist />
+            </div>
+            <div className={classes.pagination}>
+                <Pagination
+                    count={amountPagesNum}
+                    color="secondary"
+                    page={page}
+                    onChange={handleChangePage}
+                />
+            </div>
+        </React.Fragment>
+    )
+
     return (
         <section>
             <Grid container justify='center'>
-                <div className={classes.pagination}>
-                    <Pagination
-                        count={amountPagesNum}
-                        color="secondary"
-                        page={page}
-                        onChange={handleChangePage}
-                    />
-                </div>
-                <div>
-                    <CardArtist />
-                </div>
-                <div className={classes.pagination}>
-                    <Pagination
-                        count={amountPagesNum}
-                        color="secondary"
-                        page={page}
-                        onChange={handleChangePage}
-                    />
-                </div>
+                {amountPages && tracks ? homePageContent : <div className={classes.spinner}><CircularProgress /></div>}
             </Grid>
         </section>
     )
