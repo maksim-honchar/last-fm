@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -63,6 +65,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const TopBar = () => {
     const classes = useStyles()
+    const history = useHistory()
+
+    const [artist, setArtist] = useState('')
+
+    const handleChange = (e) => setArtist(e.target.value)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        history.push(`/artists/${artist}`)
+    }
 
     return (
         <div className={classes.root}>
@@ -75,14 +87,17 @@ export const TopBar = () => {
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
+                        <form onSubmit={handleSubmit}>
+                            <InputBase
+                                placeholder="find an artist…"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                                onChange={handleChange}
+                            />
+                        </form>
                     </div>
                 </Toolbar>
             </AppBar>

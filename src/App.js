@@ -11,7 +11,7 @@ import { TopTabs } from './features/TopTabs'
 import { HomePage } from './features/homepage/HomePage'
 import { ArtistPage } from './features/artistpage/ArtistPage'
 import { SearchTrackPage } from './features/search_track_page/SearchTrackPage'
-
+import { NotFound } from './features/NotFound'
 
 function App() {
   return (
@@ -23,6 +23,8 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/artists/:artist" component={ArtistPage} />
           <Route exact path="/search" component={SearchTrackPage} />
+          <Route exact path="/404" component={NotFound} />
+
           <Redirect to="/" />
         </Switch>
       </Router>

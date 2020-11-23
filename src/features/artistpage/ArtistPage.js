@@ -83,10 +83,18 @@ export const ArtistPage = ({ match }) => {
     useEffect(() => {
         const fetchData = () => async dispatch => {
             const request = await axios.get(`${artistURL}&artist=${artist}`)
-            dispatch(artistNameA(request.data.artist.name))
-            dispatch(artistPicA(request.data.artist.image[3]['#text']))
-            dispatch(artistTagsA(request.data.artist.tags.tag))
-            dispatch(artistBioA(request.data.artist.bio.summary))
+            if (!request.data.error) {
+                dispatch(artistNameA(request.data.artist.name))
+                dispatch(artistPicA(request.data.artist.image[3]['#text']))
+                dispatch(artistTagsA(request.data.artist.tags.tag))
+                dispatch(artistBioA(request.data.artist.bio.summary))
+            } else {
+                dispatch(artistNameA(''))
+                dispatch(artistPicA(''))
+                dispatch(artistTagsA([]))
+                dispatch(artistBioA(''))
+                history.push("/404")
+            }
         }
         dispatch(fetchData())
     }, [artist, dispatch])
@@ -142,7 +150,7 @@ export const ArtistPage = ({ match }) => {
         </Card>
     )
 
-    const isLoad = Boolean(artistName) && Boolean(artistPic) && Boolean(artistTags) && Boolean(artistBio)
+    const isLoad = Boolean(artistName) && Boolean(artistTags) && Boolean(artistBio)
 
     return (
         < section >
