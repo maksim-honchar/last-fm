@@ -50,7 +50,13 @@ export const ArtistPage = ({ match }) => {
         </Typography>
     )
 
-    const handleClick = () => history.push('/')
+    const handleClick = () => {
+        history.push('/')
+        dispatch(artistNameA(''))
+        dispatch(artistPicA(''))
+        dispatch(artistTagsA([]))
+        dispatch(artistBioA(''))
+    }
 
     useEffect(() => {
         const fetchData = () => async dispatch => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { findTrackA, amountTracksA } from './search_track_page/searchTrackSlice'
+import { artistNameA, artistPicA, artistTagsA, artistBioA } from './artistpage/artistPageSlice'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
@@ -31,6 +32,10 @@ export const TopTabs = () => {
                 history.push("/")
                 dispatch(findTrackA([]))
                 dispatch(amountTracksA(0))
+                dispatch(artistNameA(''))
+                dispatch(artistPicA(''))
+                dispatch(artistTagsA([]))
+                dispatch(artistBioA(''))
                 break;
             case 1:
                 history.push("/search")
