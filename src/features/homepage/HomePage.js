@@ -3,17 +3,18 @@ import { topTracksURL } from '../../app/utils'
 import { useDispatch, useSelector } from 'react-redux'
 import { topTracksA, pagesInfoA, selectTotalPages } from './topTracksSlice'
 import axios from 'axios'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
-import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+
 import { CardArtist } from './CardArtist'
 
 const useStyles = makeStyles((theme) => ({
     pagination: {
-        '& > *': {
-            marginTop: theme.spacing(2),
-        },
-    },
+        paddingTop: theme.spacing(5),
+        paddingBottom: theme.spacing(5)
+    }
 }))
 
 export const HomePage = () => {
@@ -38,26 +39,27 @@ export const HomePage = () => {
 
     return (
         <section>
-            <Typography component="h2" variant="h4">
-                top tracks
-            </Typography>
-            <div className={classes.pagination}>
-                <Pagination
-                    count={amountPagesNum}
-                    color="secondary"
-                    page={page}
-                    onChange={handleChangePage}
-                />
-            </div>
-            <CardArtist />
-            <div className={classes.pagination}>
-                <Pagination
-                    count={amountPagesNum}
-                    color="secondary"
-                    page={page}
-                    onChange={handleChangePage}
-                />
-            </div>
+            <Grid container justify='center'>
+                <div className={classes.pagination}>
+                    <Pagination
+                        count={amountPagesNum}
+                        color="secondary"
+                        page={page}
+                        onChange={handleChangePage}
+                    />
+                </div>
+                <div>
+                    <CardArtist />
+                </div>
+                <div className={classes.pagination}>
+                    <Pagination
+                        count={amountPagesNum}
+                        color="secondary"
+                        page={page}
+                        onChange={handleChangePage}
+                    />
+                </div>
+            </Grid>
         </section>
     )
 }
