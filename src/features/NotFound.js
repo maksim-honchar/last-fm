@@ -27,6 +27,8 @@ export const NotFound = () => {
             className={classes.wrapper}
             container
             direction="column"
+            justify="center"
+            alignItems="center"
         >
             <Grid item xs>
                 <Typography variant="h2">
