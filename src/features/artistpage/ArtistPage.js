@@ -75,11 +75,11 @@ export const ArtistPage = ({ match }) => {
     )
 
     const handleClick = () => {
-        history.push('/')
-        // dispatch(artistNameA(''))
-        // dispatch(artistPicA(''))
-        // dispatch(artistTagsA([]))
-        // dispatch(artistBioA(''))
+        history.goBack()
+        dispatch(artistNameA(''))
+        dispatch(artistPicA(''))
+        dispatch(artistTagsA([]))
+        dispatch(artistBioA(''))
     }
 
     useEffect(() => {
