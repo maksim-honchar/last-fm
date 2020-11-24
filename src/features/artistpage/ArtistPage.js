@@ -48,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
     },
     spinner: {
-        marginTop: theme.spacing(20)
+        marginTop: theme.spacing(20),
+        textAlign: 'center'
     }
 }))
 
@@ -75,10 +76,10 @@ export const ArtistPage = ({ match }) => {
 
     const handleClick = () => {
         history.push('/')
-        dispatch(artistNameA(''))
-        dispatch(artistPicA(''))
-        dispatch(artistTagsA([]))
-        dispatch(artistBioA(''))
+        // dispatch(artistNameA(''))
+        // dispatch(artistPicA(''))
+        // dispatch(artistTagsA([]))
+        // dispatch(artistBioA(''))
     }
 
     useEffect(() => {
